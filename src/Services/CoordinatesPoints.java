@@ -41,6 +41,41 @@ public class CoordinatesPoints {
 		return scenas;
 	}
 	
+
+	public List<Map<String, String>> getPoint2()  {
+		ReadFile readFile = new ReadFile();
+		String points = readFile.readPoints2();
+
+		List<Map<String, String>> scenas = new ArrayList<>();
+		Map<String, String> map;
+		String[] tabscenas = points.split("/");
+		for (int i = 0; i < tabscenas.length; i++) {
+			map = new TreeMap<>(new Comparator<String>() {
+
+				@Override
+				public int compare(String h1, String h2) {
+					return h1.compareTo(h2);
+				}
+
+			});
+			String[] tabscen = tabscenas[i].split(";");
+
+			for (int j = 0; j < tabscen.length; j++) {
+				String[] tabVals = tabscen[j].split(":");
+
+				for (int k = 0; k < tabVals.length - 1; k++) {
+					map.put(tabVals[k], tabVals[k + 1]);
+
+				}
+			}
+
+			scenas.add(map);
+		}
+		return scenas;
+	}
+
+	
+	
 	
 	/*public static void main(String[] args) {
 		CoordinatesPoints coordinatesPoints = new CoordinatesPoints();

@@ -8,6 +8,9 @@ import java.util.Properties;
 public class ReadFile {
 
 	String points;
+	String points2;
+
+	
 
 	public ReadFile() {
 	}
@@ -24,4 +27,25 @@ public class ReadFile {
 		}
 		return points;
 	}
+	
+	
+	/////////////////////
+	
+	public String readPoints2() {
+		Properties prop = new Properties();
+		try {
+			InputStream input = new FileInputStream("resources\\villeEuler.properties");
+			// loads the file properties
+			prop.load(input);
+			points2 = prop.getProperty("points2");
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		return points2;
+	}
+	
+	
+	
+	
+	
 }

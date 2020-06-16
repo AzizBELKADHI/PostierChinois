@@ -94,9 +94,16 @@ public class AppHome extends JFrame {
 		tabbedPane.addTab("Ville eulerienne", null, panel_2, null);
 		panel_2.setLayout(new CardLayout(0, 0));
 		panel_2.add(drawingEuler);
+		
 
 		JPanel panel_3 = new JPanel();
 		tabbedPane.addTab("Ville non eulerienne", null, panel_3, null);
+		panel_3.setLayout(new CardLayout(0, 0));
+		
+		DrawingNonEuler drawingNonEuler = new DrawingNonEuler();
+		panel_3.add(drawingNonEuler);
+
+		
 
 	}
 }
