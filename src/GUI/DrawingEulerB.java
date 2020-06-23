@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 import Services.CoordinatesPoints;
 import Services.Point;
 
-public class DrawingEuler extends JPanel {
+public class DrawingEulerB extends JPanel {
 	/**
 	 * 
 	 */
@@ -36,10 +36,10 @@ public class DrawingEuler extends JPanel {
 		//
 
 		// stockage des points dans une liste <Point>
-		for (int i = 0; i < coordinatesPoints.getPoint().size(); i++) {
-			listPoint.add(new Point(coordinatesPoints.getPoint().get(i).get("id"),
-					Integer.parseInt(coordinatesPoints.getPoint().get(i).get("x")),
-					Integer.parseInt(coordinatesPoints.getPoint().get(i).get("y"))));
+		for (int i = 0; i < coordinatesPoints.getPoint3().size(); i++) {
+			listPoint.add(new Point(coordinatesPoints.getPoint3().get(i).get("id"),
+					Integer.parseInt(coordinatesPoints.getPoint3().get(i).get("x")),
+					Integer.parseInt(coordinatesPoints.getPoint3().get(i).get("y"))));
 		}
 
 		for (int j = 0; j < listPoint.size(); j++) {
@@ -48,22 +48,17 @@ public class DrawingEuler extends JPanel {
 
 				int pos = this.isExist(listPoint, ss.get(it));
 				Point p = listPoint.get(pos);
-				if (listPoint.get(j).getId().equals("C") || listPoint.get(j).getId().equals("E"))
-					g2.drawString(listPoint.get(j).getId(), listPoint.get(j).getX() + 10, listPoint.get(j).getY());
-				if (listPoint.get(j).getId().equals("B") || listPoint.get(j).getId().equals("D"))
-					g2.drawString(listPoint.get(j).getId(), listPoint.get(j).getX() - 20, listPoint.get(j).getY());
-				if (listPoint.get(j).getId().equals("A"))
-					g2.drawString(listPoint.get(j).getId(), listPoint.get(j).getX(), listPoint.get(j).getY()-10);
-				if (listPoint.get(j).getId().equals("F"))
-					g2.drawString(listPoint.get(j).getId(), listPoint.get(j).getX(), listPoint.get(j).getY()+20);
 
+				if (listPoint.get(j).getId().equals("B") || listPoint.get(j).getId().equals("D")
+						|| listPoint.get(j).getId().equals("G") || listPoint.get(j).getId().equals("I")) {
+					g2.drawString(listPoint.get(j).getId(), listPoint.get(j).getX(), listPoint.get(j).getY()+20);
+				} else {
+					g2.drawString(listPoint.get(j).getId(), listPoint.get(j).getX(), listPoint.get(j).getY()-12);
+				}
 				g2.drawLine(listPoint.get(j).getX(), listPoint.get(j).getY(), p.getX(), p.getY());
-				
-			
 			}
-		
 		}
-		
+
 	}
 
 	public int isExist(List<Point> l, String id) {
@@ -73,21 +68,29 @@ public class DrawingEuler extends JPanel {
 		}
 		return -1;
 	}
-	
-	public HashMap<String, List<String>> listAdj(){
+
+	public HashMap<String, List<String>> listAdj() {
 		HashMap<String, List<String>> listAdj = new HashMap<String, List<String>>();
 		listAdj.put("A", Arrays.asList("B", "C"));
-		listAdj.put("B", Arrays.asList("A", "C", "D", "E"));
-		listAdj.put("C", Arrays.asList("A", "B", "D", "E"));
-		listAdj.put("D", Arrays.asList("B", "C", "E", "F"));
-		listAdj.put("E", Arrays.asList("B", "C", "D", "F"));
-		listAdj.put("F", Arrays.asList("D", "E"));
+		listAdj.put("B", Arrays.asList("A", "D"));
+		listAdj.put("C", Arrays.asList("A", "E"));
+		listAdj.put("D", Arrays.asList("B", "F"));
+		listAdj.put("E", Arrays.asList("C", "F"));
+		listAdj.put("F", Arrays.asList("G", "H", "D", "E"));
+		listAdj.put("G", Arrays.asList("F", "I"));
+		listAdj.put("H", Arrays.asList("F", "J"));
+		listAdj.put("I", Arrays.asList("G", "K"));
+		listAdj.put("J", Arrays.asList("H", "K"));
+		listAdj.put("K", Arrays.asList("L", "M", "I", "J"));
+		listAdj.put("L", Arrays.asList("K", "M"));
+		listAdj.put("M", Arrays.asList("K", "L"));
+
 		return listAdj;
 	}
 
 	public int nbArete(HashMap<String, List<String>> map) {
 		int nb = 0;
-		List<String> listSommet = Arrays.asList("A", "B", "C", "D", "E", "F");
+		List<String> listSommet = Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M");
 		for (int i = 0; i < map.size(); i++) {
 			nb += map.get(listSommet.get(i)).size();
 		}
@@ -96,7 +99,3 @@ public class DrawingEuler extends JPanel {
 	}
 
 }
-
-
-
-

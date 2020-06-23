@@ -97,15 +97,14 @@ public class Graph {
 
 	// display result
 
-	public void printResult() {
-		String output = "Number of nodes = " + this.noOfNodes;
-		output += "\nNumber of edges = " + this.noOfEdges;
+	public String printResult() {
+		String output = "";
 
 		for (int i = 0; i < this.nodes.length; i++) {
 			output += ("\nThe shortest distance from node 0 to node " + i + " is " + nodes[i].getDistanceFromSource());
 		}
 
-		System.out.println(output);
+		return output;
 
 	}
 

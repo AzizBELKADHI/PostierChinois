@@ -6,12 +6,12 @@ import java.util.List;
 
 public class AlgoEuler {
 
-	public List<String> cycleEuler(String sommet, HashMap<String, List<String>> listAdj) {
+	public List<String> cycleEuler(String sommet, HashMap<String, List<String>> listAdj, int nbArete) {
 		List<String> listSommet = new ArrayList<String>();
 		listSommet.add(sommet);
 		List<Adjacence> arete = new ArrayList<Adjacence>();
 		int j = 0;
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < nbArete; i++) {
 			if (arete.isEmpty()) {
 				List<String> adj = listAdj.get(listSommet.get(j));
 				arete.add(new Adjacence(listSommet.get(j), adj.get(0)));
@@ -21,6 +21,7 @@ public class AlgoEuler {
 				int it = 0;
 				boolean test = false;
 				while ((it < adj.size()) && (test == false)) {
+					System.out.println("pos " + isExist(listSommet, adj));
 					if (isExist(listSommet, adj) != -1) {
 						arete.add(new Adjacence(listSommet.get(j), adj.get(isExist(listSommet, adj))));
 						listSommet.add(adj.get(isExist(listSommet, adj)));

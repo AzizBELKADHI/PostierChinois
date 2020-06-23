@@ -47,14 +47,14 @@ public class DrawingNonEuler extends JPanel {
 				int pos = this.isExist(listPoint, ss.get(it));
 				Point p = listPoint.get(pos);
 
-				if (listPoint.get(j).getId().equals("I") || listPoint.get(j).getId().equals("K"))
-					g2.drawString(listPoint.get(j).getId(), listPoint.get(j).getX() + 10, listPoint.get(j).getY());
-				if (listPoint.get(j).getId().equals("H") || listPoint.get(j).getId().equals("J"))
-					g2.drawString(listPoint.get(j).getId(), listPoint.get(j).getX() - 20, listPoint.get(j).getY());
-				if (listPoint.get(j).getId().equals("G"))
+				if (listPoint.get(j).getId().equals("0") || listPoint.get(j).getId().equals("1")
+						|| listPoint.get(j).getId().equals("2") || listPoint.get(j).getId().equals("3")) 
 					g2.drawString(listPoint.get(j).getId(), listPoint.get(j).getX(), listPoint.get(j).getY()-10);
-				
-				
+					if (listPoint.get(j).getId().equals("4") || listPoint.get(j).getId().equals("7")) 
+						g2.drawString(listPoint.get(j).getId(), listPoint.get(j).getX()-20, listPoint.get(j).getY());
+						if (listPoint.get(j).getId().equals("6") || listPoint.get(j).getId().equals("5")) 
+							g2.drawString(listPoint.get(j).getId(), listPoint.get(j).getX()+10, listPoint.get(j).getY());
+					
 				g2.drawLine(listPoint.get(j).getX(), listPoint.get(j).getY(), p.getX(), p.getY());
 			}
 		}
@@ -73,11 +73,14 @@ public class DrawingNonEuler extends JPanel {
 	
 	public HashMap<String, List<String>> listAdj(){
 		HashMap<String, List<String>> listAdj = new HashMap<String, List<String>>();
-		listAdj.put("G", Arrays.asList("H", "I"));
-		listAdj.put("H", Arrays.asList("G", "I", "J"));
-		listAdj.put("I", Arrays.asList("G", "H", "K"));
-		listAdj.put("J", Arrays.asList("H", "K"));
-		listAdj.put("K", Arrays.asList("I", "J"));
+		listAdj.put("0", Arrays.asList("1", "2", "3", "4"));
+		listAdj.put("1", Arrays.asList("0", "3", "4", "5"));
+		listAdj.put("2", Arrays.asList("0", "4"));
+		listAdj.put("3", Arrays.asList("0", "1", "5"));
+		listAdj.put("4", Arrays.asList("0", "1", "2", "5", "6", "7"));
+		listAdj.put("5", Arrays.asList("1", "3", "4", "6"));
+		listAdj.put("6", Arrays.asList("4", "5", "7"));
+		listAdj.put("7", Arrays.asList("4", "6"));
 		return listAdj;
 	}
 	

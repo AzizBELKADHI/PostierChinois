@@ -9,6 +9,7 @@ public class ReadFile {
 
 	String points;
 	String points2;
+	String points3;
 
 	
 
@@ -26,6 +27,19 @@ public class ReadFile {
 			ex.printStackTrace();
 		}
 		return points;
+	}
+	
+	public String readPoints3() {
+		Properties prop = new Properties();
+		try {
+			InputStream input = new FileInputStream("resources\\villeEuler.properties");
+			// loads the file properties
+			prop.load(input);
+			points3 = prop.getProperty("points3");
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		return points3;
 	}
 	
 	
