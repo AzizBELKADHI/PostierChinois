@@ -96,16 +96,13 @@ public class Graph {
 	}
 
 	// display result
-
 	public String printResult() {
 		String output = "";
 
 		for (int i = 0; i < this.nodes.length; i++) {
-			output += ("\nThe shortest distance from node 0 to node " + i + " is " + nodes[i].getDistanceFromSource());
+			output += ("Le plus court chemin de 0 à " + i + " est " + nodes[i].getDistanceFromSource()+"\n");
 		}
-
 		return output;
-
 	}
 
 	public Node[] getNodes() {

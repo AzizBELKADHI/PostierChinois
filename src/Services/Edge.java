@@ -25,7 +25,19 @@ public class Edge {
 	public int getlength() {
 		return length;
 	}
-	
+
+	public void setLength(int length) {
+		this.length = length;
+	}
+
+	public void setFromNodeIndex(int fromNodeIndex) {
+		this.fromNodeIndex = fromNodeIndex;
+	}
+
+	public void setToNodeIndex(int toNodeIndex) {
+		this.toNodeIndex = toNodeIndex;
+	}
+
 	// determines the neighbouring node of supplied node , based on the two nodes connected by this edge
 	public int getNeighbourIndex(int nodeIndex) {
 		if (this.fromNodeIndex == nodeIndex) {

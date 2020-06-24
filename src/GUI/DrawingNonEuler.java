@@ -16,6 +16,7 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 import Services.CoordinatesPoints;
+import Services.Edge;
 import Services.Point;
 
 public class DrawingNonEuler extends JPanel {
@@ -30,9 +31,8 @@ public class DrawingNonEuler extends JPanel {
 		g2.setColor(Color.BLACK);
 
 		CoordinatesPoints coordinatesPoints = new CoordinatesPoints();
-
 		ArrayList<Point> listPoint = new ArrayList<Point>();
-
+		ArrayList<Point> listP = new ArrayList<Point>();
 		// stockage des points dans une liste <Point>
 		for (int i = 0; i < coordinatesPoints.getPoint2().size(); i++) {
 			listPoint.add(new Point(coordinatesPoints.getPoint2().get(i).get("id"),
@@ -42,23 +42,32 @@ public class DrawingNonEuler extends JPanel {
 
 		for (int j = 0; j < listPoint.size(); j++) {
 			List<String> ss = this.listAdj().get(listPoint.get(j).getId());
+			
 			for (int it = 0; it < ss.size(); it++) {
-
 				int pos = this.isExist(listPoint, ss.get(it));
 				Point p = listPoint.get(pos);
 
 				if (listPoint.get(j).getId().equals("0") || listPoint.get(j).getId().equals("1")
-						|| listPoint.get(j).getId().equals("2") || listPoint.get(j).getId().equals("3")) 
-					g2.drawString(listPoint.get(j).getId(), listPoint.get(j).getX(), listPoint.get(j).getY()-10);
-					if (listPoint.get(j).getId().equals("4") || listPoint.get(j).getId().equals("7")) 
-						g2.drawString(listPoint.get(j).getId(), listPoint.get(j).getX()-20, listPoint.get(j).getY());
-						if (listPoint.get(j).getId().equals("6") || listPoint.get(j).getId().equals("5")) 
-							g2.drawString(listPoint.get(j).getId(), listPoint.get(j).getX()+10, listPoint.get(j).getY());
-					
-				g2.drawLine(listPoint.get(j).getX(), listPoint.get(j).getY(), p.getX(), p.getY());
-			}
-		}
+						|| listPoint.get(j).getId().equals("2") || listPoint.get(j).getId().equals("3"))
+					g2.drawString(listPoint.get(j).getId(), listPoint.get(j).getX(), listPoint.get(j).getY() - 10);
+				if (listPoint.get(j).getId().equals("4") || listPoint.get(j).getId().equals("7"))
+					g2.drawString(listPoint.get(j).getId(), listPoint.get(j).getX() - 20, listPoint.get(j).getY());
+				if (listPoint.get(j).getId().equals("6") || listPoint.get(j).getId().equals("5"))
+					g2.drawString(listPoint.get(j).getId(), listPoint.get(j).getX() + 10, listPoint.get(j).getY());
 
+				g2.drawLine(listPoint.get(j).getX(), listPoint.get(j).getY(), p.getX(), p.getY());
+			
+				
+				listP.add(new Point((listPoint.get(j).getX()+p.getX())/2, (listPoint.get(j).getY()+p.getY())/2));
+			}
+			
+		}
+	
+		for(int i = 0 ; i<listP.size();i++) {
+			g2.drawString(coordinatesPoints.getDistance().get(i).get("length"),listP.get(i).getX(),listP.get(i).getY());				
+			
+		}
+		
 	}
 
 	public int isExist(List<Point> l, String id) {
@@ -68,10 +77,8 @@ public class DrawingNonEuler extends JPanel {
 		}
 		return -1;
 	}
-	
-	
-	
-	public HashMap<String, List<String>> listAdj(){
+
+	public HashMap<String, List<String>> listAdj() {
 		HashMap<String, List<String>> listAdj = new HashMap<String, List<String>>();
 		listAdj.put("0", Arrays.asList("1", "2", "3", "4"));
 		listAdj.put("1", Arrays.asList("0", "3", "4", "5"));
@@ -83,6 +90,5 @@ public class DrawingNonEuler extends JPanel {
 		listAdj.put("7", Arrays.asList("4", "6"));
 		return listAdj;
 	}
-	
-	
+
 }

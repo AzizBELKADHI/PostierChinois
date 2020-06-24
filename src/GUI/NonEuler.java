@@ -10,8 +10,10 @@ import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 
 import Services.AlgoEuler;
+import Services.CoordinatesPoints;
 import Services.Edge;
 import Services.Graph;
+import Services.Point;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -19,6 +21,7 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JTextArea;
 
@@ -29,11 +32,10 @@ public class NonEuler extends JPanel {
 	 */
 	public NonEuler() {
 		setLayout(null);
-		
+
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(0, 0, 672, 460);
 
-		
 		DrawingNonEuler drawingNonEuler = new DrawingNonEuler();
 
 		add(panel_1);
@@ -78,7 +80,7 @@ public class NonEuler extends JPanel {
 		panel_2.add(panel_6);
 		panel_6.setLayout(null);
 
-		JLabel lblNewLabel_3 = new JLabel("Voici le chemin travers\u00E9 par le postier\r\n");
+		JLabel lblNewLabel_3 = new JLabel("Le chemin du postier\r\n");
 		lblNewLabel_3.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		lblNewLabel_3.setBounds(6, 16, 243, 16);
 		panel_6.add(lblNewLabel_3);
@@ -86,39 +88,27 @@ public class NonEuler extends JPanel {
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(6, 33, 243, 2);
 		panel_6.add(separator_1);
-		
+
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(6, 44, 243, 158);
 		panel_6.add(scrollPane_1);
-		
+
 		JTextArea textArea = new JTextArea();
 		scrollPane_1.setViewportView(textArea);
-	
+
 		JButton btnNewButton = new JButton("Simuler");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Edge[] edges = {
-						new Edge(0 , 2 , 1),
-						new Edge(0 , 3 , 4),
-						new Edge(0 , 4 , 2),
-						new Edge(0 , 1 , 3),
-						new Edge(1 , 3 , 2),
-						new Edge(1 , 4 , 3),
-						new Edge(1 , 5 , 1),
-						new Edge(2 , 4 , 1),
-						new Edge(3 , 5 , 4),
-						new Edge(4 , 5 , 2),
-						new Edge(4 , 6 , 7),
-						new Edge(4 , 7 , 2),
-						new Edge(5 , 6 , 4),
-						new Edge(6 , 7 , 5)		
-				} ;
-				
-			Graph g = new Graph(edges);
-			g.calculateShortestDistance();
-			
-			
-			textArea.setText(g.printResult()); 
+				CoordinatesPoints coordinatesPoints = new CoordinatesPoints();
+				Edge[] edges = new Edge[coordinatesPoints.getDistance().size()];
+				for (int i = 0; i < coordinatesPoints.getDistance().size(); i++) {
+					edges[i] = new Edge(Integer.parseInt(coordinatesPoints.getDistance().get(i).get("fromNodeIndex")),
+							Integer.parseInt(coordinatesPoints.getDistance().get(i).get("toNodeIndex")),
+							Integer.parseInt(coordinatesPoints.getDistance().get(i).get("length")));
+				}
+				Graph g = new Graph(edges);
+				g.calculateShortestDistance();
+				textArea.setText(g.printResult());
 			}
 		});
 		btnNewButton.setForeground(new Color(255, 255, 255));
@@ -128,8 +118,6 @@ public class NonEuler extends JPanel {
 		panel_4.add(btnNewButton);
 
 		panel_5.add(drawingNonEuler);
-
-		
 
 	}
 }

@@ -30,7 +30,8 @@ public class Euler extends JPanel {
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(0, 0, 672, 460);
 
-		
+
+		DrawingEuler drawingEuler = new DrawingEuler();
 		DrawingEulerB drawingEulerB = new DrawingEulerB();
 
 		add(panel_1);
@@ -94,7 +95,6 @@ public class Euler extends JPanel {
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(6, 33, 243, 2);
 		panel_6.add(separator_1);
-		DrawingEuler drawingEuler = new DrawingEuler();
 		JButton btnNewButton = new JButton("Simuler");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -118,6 +118,7 @@ public class Euler extends JPanel {
 		panel_5.add(drawingEuler);
 
 		JPanel panel_3 = new JPanel();
+		panel_3.setBackground(SystemColor.control);
 		tabbedPane.addTab("Deuxième Ville", null, panel_3, null);
 		panel_3.setLayout(null);
 		
@@ -128,7 +129,7 @@ public class Euler extends JPanel {
 		panel_7.setLayout(null);
 
 		JPanel panel_8 = new JPanel();
-		panel_8.setBackground(new Color(255, 255, 255));
+		panel_8.setBackground(SystemColor.control);
 		panel_8.setBounds(0, 65, 411, 359);
 		panel_3.add(panel_8);
 		panel_8.setLayout(new CardLayout());

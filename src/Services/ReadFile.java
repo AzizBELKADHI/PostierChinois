@@ -59,6 +59,18 @@ public class ReadFile {
 	}
 	
 	
+	public String readDistance() {
+		Properties prop = new Properties();
+		try {
+			InputStream input = new FileInputStream("resources\\villeEuler.properties");
+			// loads the file properties
+			prop.load(input);
+			points = prop.getProperty("distance");
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		return points;
+	}
 	
 	
 	
